@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Python High Performance 读书笔记1 | Timing is Fun</title>
+<meta name="description" content="一名死磕时序数据的小白">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://CecilR.github.io/favicon.ico?v=1556269898788">
+<link rel="stylesheet" href="https://CecilR.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138649853-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-138649853-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://CecilR.github.io">
+        <img src="https://CecilR.github.io/images/avatar.png?v=1556269898788" class="site-logo">
+        <h1 class="site-title">Timing is Fun</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/post/about/" class="site-nav">
+            About
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      一名死磕时序数据的小白
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Python High Performance 读书笔记1</h2>
+            <div class="post-date">2019-04-26</div>
+            
+              <div class="feature-container" style="background-image: url('https://CecilR.github.io/post-images/python-high-performance-du-shu-bi-ji-1.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>S1&amp;S2 性能测试 &amp; 纯粹python内优化</p>
+<!-- more --> 
+<h1 id="s1s2-性能测试-纯粹python内优化">S1&amp;S2 性能测试 &amp; 纯粹python内优化</h1>
+<blockquote>
+<p>这是关于《Python 高性能》这本书的读书笔记，书本相关代码可在<a href="https://github.com/PacktPublishing/Python-High-Performance-Second-Edition">Repository</a>中下载。</p>
+<p>This is my reading notes for <em>Python high performance</em>. Related codes in this book are available in <a href="https://github.com/PacktPublishing/Python-High-Performance-Second-Edition">Repository</a>.</p>
+<p>本文为第一章（测试）与第二章（纯粹的python优化）的内容。
+This article covers chapter 1 (benchmark) and chapter 2 (optimization in python).</p>
+</blockquote>
+<h2 id="s1-benchmark">S1 - BenchMark</h2>
+<blockquote>
+<p>相关文献 <a href="https://nbviewer.jupyter.org/gist/jiffyclub/3062428">Timing</a></p>
+</blockquote>
+<h3 id="time-timeit-文件级的benchmark">time &amp; timeit - 文件级的benchmark</h3>
+<ul>
+<li><em>time</em> only in unix bash</li>
+</ul>
+<pre><code class="language-bash">time simul.py
+</code></pre>
+<ul>
+<li><em>timeit</em> in Ipython, bash, or inside python</li>
+</ul>
+<pre><code class="language-python"># Ipython
+from simul import benchmark
+%timeit benchmark()
+</code></pre>
+<pre><code class="language-bash"># bash
+python -m timeit -s 'from simul import benchmark' 'benchmark()'
+</code></pre>
+<pre><code class="language-python"># python
+ import timeit
+ result = timeit.repeat('benchmark()', setup='from simul import benchmark', number = 10, repeat = 3)
+ print(result)
+ result = timeit.timeit('benchmark()', setup='from simul import benchmark', number = 10)
+ print(result)
+</code></pre>
+<h3 id="pytest-pytest-benchmark-文件级的benchmark">pytest &amp; pytest-benchmark - 文件级的benchmark</h3>
+<ul>
+<li>add <em>benchmark</em> to the funciton args, e.g. test_evolve in test_simul.py</li>
+</ul>
+<pre><code class="language-bash"># bash
+pytest test_simul.py::test_evolve
+</code></pre>
+<h3 id="cprofile-函数级的benchmark">cProfile - 函数级的benchmark</h3>
+<ul>
+<li>function analysis in bash</li>
+</ul>
+<pre><code class="language-bash"># bash
+python -m cProfile simul.py
+python -m cProfile -s tottime simul.py
+python -m cProfile -s tottime -o prof.out simul.py #输出可由status模块解析的文件
+</code></pre>
+<ul>
+<li>function analysis in .py</li>
+</ul>
+<pre><code class="language-bash"># bash
+# code show in cprofile.py
+python cprofile.py
+</code></pre>
+<ul>
+<li>function analysis in Ipython</li>
+</ul>
+<pre><code class="language-python"># Ipython
+from simul import benchmark
+%prun benchmark()
+</code></pre>
+<ul>
+<li>
+<p>analysis resullt</p>
+<ol>
+<li>ncalls: 函数被调用次数</li>
+<li>tottime: 执行花费总时间，不考虑其他函数调用</li>
+<li>cumtime: 执行花费总时间，考虑其他函数调用</li>
+<li>percall: 单次执行时间，不考虑其他函数调用</li>
+<li>filename:lineno: 文件名和响应的行号</li>
+</ol>
+</li>
+<li>
+<p>结果可视化 - KCachegrind(with pyprof2calltree)</p>
+</li>
+</ul>
+<pre><code class="language-bash"># Bash
+python -m cProfile -o prof.out taylor.py
+pyprof2calltree -i prof.out -o prof.calltree
+qcachegrind prof.calltree  # ??? Call Graph not usable
+</code></pre>
+<h3 id="line_profiler-行级的分析">line_profiler - 行级的分析</h3>
+<ul>
+<li>.py 文件 ＋ 命令行</li>
+</ul>
+<pre><code class="language-python"># .py文件
+@profile
+def evolve(self, dt):
+    # 代码
+</code></pre>
+<pre><code class="language-bash">#base
+kernprof -l -v simul.py
+</code></pre>
+<ul>
+<li>在Ipython中</li>
+</ul>
+<pre><code class="language-python"># Ipython
+%load_ext line_profiler
+from simul import benchmark, ParticleSimulator
+%lprun -f ParticleSimulator.evolve benchmark()
+</code></pre>
+<ul>
+<li>
+<p>analysis resullt</p>
+<ol>
+<li>Line # ：行号</li>
+<li>Hits : 次数</li>
+<li>Time : 执行时间，us</li>
+<li>Per Hit : Time/Hits</li>
+<li>% Time : 时间百分比</li>
+<li>Line Contents : 内容</li>
+</ol>
+</li>
+</ul>
+<h3 id="dis-disassemble模块反汇编为字节码">dis - disassemble模块，反汇编为字节码</h3>
+<ul>
+<li>在命令行中</li>
+</ul>
+<pre><code class="language-bash"># bash
+import dis
+from simul import ParticleSimulator
+dis.dis(ParticleSimulator.evolve)
+</code></pre>
+<h3 id="memory_profiler-内存使用情况">memory_profiler - 内存使用情况</h3>
+<ul>
+<li>在Ipython中使用</li>
+</ul>
+<pre><code class="language-python"># Ipython
+%load_ext memory_profiler
+from simul import benchmark_memory, ParticleSimulator
+%mprun -f ParticleSimulator.evolve benchmark_memory()
+</code></pre>
+<ul>
+<li><strong>slots</strong> : 通过避免将实例储存在内部字典中，从而节省一些内存，但不能添加没有指定的属性</li>
+</ul>
+<pre><code class="language-python">class Particle:
+    __slots__ = ('x', 'y', 'ang_vel')
+
+    def __init__(self, x, y, ang_vel):
+        self.x = x
+        self.y = y
+        self.ang_vel = ang_vel
+</code></pre>
+<h2 id="s2-python-optimal">S2 - python optimal</h2>
+<h3 id="s21-useful-structures-algorithms">S2.1 useful structures &amp; algorithms</h3>
+<h4 id="list-deque-列表和双端队列">list &amp; deque - 列表和双端队列</h4>
+<ul>
+<li>list
+<ul>
+<li>访问：O(1)</li>
+<li>尾部插入、删除元素(append(1), pop())：O(1)。（如果list所有位置都被占，会触发内存重新分配，此时为O(N)）</li>
+<li>头部或中间插入、删除元素(insert(0,1), pop(0))：O(N)</li>
+<li>查询：O(N)
+<ul>
+<li>如果list有序，使用bisect（二分）查找：O(log(N))<pre><code class="language-python">    import bisect
+    collection = [1,2,3,4,5,6]
+    bisect.bisect(collection, 3) # 返回值为 3
+
+    def index_bisect(a, x):
+        i = bisect.bisect(a, x)
+        if i != len(a) and a[i] == x:
+            return i
+        raise ValueError
+    
+    index_bisect(collection, 3) # 返回值为 2
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>deque(collections.deque)
+<ul>
+<li>访问：O(N) - (因此不常用)</li>
+<li>尾部插入、删除(pop(), append(1))：O(1)</li>
+<li>头部插入、删除(popleft(), appendleft(1)): O(1)</li>
+</ul>
+</li>
+</ul>
+<h4 id="dict-字典">dict - 字典</h4>
+<ul>
+<li>访问、插入、删除：O(1)</li>
+<li>demo
+<ul>
+<li>计数独特值的出现次数<pre><code class="language-python">def conter_dict(items):
+    counter = {}
+    for item in items:
+        if item not in counter:
+            counter[item] = 0
+        else:
+            counter[item] += 1
+    return counter
+
+from collections import defaultdict
+def counter_defaultdict(items):
+    counter = defaultdict(int) # 默认初始化为0值，但是效率没有方法一高
+    for item in items:
+        counter[item] += 1
+    return counter
+
+from collections import Counter
+counter = Counter(item) # item 为列表，效率最高
+</code></pre>
+</li>
+<li>索引化查找（O(1),但空间复杂度高，灵活性低）<pre><code class="language-python">docs = [&quot;the cat is under the table&quot;,
+        &quot;the dog is under the table&quot;,
+        &quot;cats and dogs smell roses&quot;,
+        &quot;Carla eats an apple&quot;]
+matches = [doc for doc in docs if &quot;table&quot; in doc] # O(N)
+
+index = {}
+for i, doc in enumerate(docs):
+    for word in doc.split():
+        if word not in index:
+            index[word] = [i]
+        else:
+            index[word].append(i)
+
+results = index[&quot;table&quot;]
+result_documents = [docs[i] for i in results] # O(1)
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="set-集">set - 集</h4>
+<ul>
+<li>插入、删除、成员资格测试：O(1)</li>
+<li>并、交、差集
+<ul>
+<li>并：s.union(t) - O(S+T)</li>
+<li>交：s.intersection(t) - O(min(S,T))</li>
+<li>差集：s.difference(t) - O(S)</li>
+</ul>
+</li>
+<li>demo
+<ul>
+<li>剔除集合中重复元素 - O(N)<pre><code class="language-python">x = list(range(1000))+list(range(500))
+x_unique = set(x)
+</code></pre>
+</li>
+<li>布尔查询，索引化查找的可交可并可差版本 - O(1)<pre><code class="language-python">index = {}
+for i, doc in enumerate(docs):
+    for word in doc.split():
+        if word not in index:
+            index[word] = {i} # 创建set
+        else:
+            index[word].append(i)
+# 后续可以通过多个关键词的交、并、差操作进行高级化查找
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="heapq-堆">heapq - 堆</h4>
+<ul>
+<li>用作查找最大最小值
+<ul>
+<li>有序list用作查找最大最小值时，提取最大值(pop)-O(1); 插入(insert)-O(N);查找(bisect)-O(log(N))</li>
+</ul>
+</li>
+<li>插入和提取最大值 - O(log(N))</li>
+<li>demo
+<ul>
+<li>heapq</li>
+</ul>
+<pre><code class="language-python">import heapq
+collection = [10,3,3,4,5,6]
+heapq.heapify(collection)
+
+heapq.heappop(collection) # 返回最小值 3
+heapq.heappush(collection, 1) # 压入 1
+</code></pre>
+<ul>
+<li>queue.priorityQueue - 线程和进程安全</li>
+</ul>
+<pre><code class="language-python">from queue import PriorityQueue
+
+queue = PriorityQueue()
+for element in collection:
+    que.put(element) # 压入
+queue.get() # 返回最小值 3， 若要获得最大值，可以乘以-1
+
+'''将数字关联到一个对象上，（number, object）元组'''
+queue1 = PriortyQueue()
+queue1.put((3, &quot;priority 3&quot;))
+queue1.put((2, &quot;priority 2&quot;))
+queue1.put((1, &quot;priority 1&quot;))
+queue1.get() # 返回：(1, &quot;priority 1&quot;)
+</code></pre>
+</li>
+</ul>
+<h4 id="strings_dict-字典树前缀树">strings_dict - 字典树(前缀树)</h4>
+<ul>
+<li>用来在列表中查找与前缀匹配的字符串</li>
+<li>需要pip安装patricia-trie（进一步可以使用C语言编写的datrie和marisa-trie）</li>
+<li>demo<pre><code class="language-python">from random import choice
+from string import ascii_uppercase
+
+def random_string(length):
+		return ''.join(choice(ascii_uppercase) for i in range(length))
+
+strings = [random_string(32) for i in range(10000)]
+matches = [s for s in strings if s.startswith('AA')] # 线性扫描 - O(N)
+# %timeit [s for s in strings if s.startswith('AA')]
+
+from patricia import trie # 字典树
+strings_dict = {s:0 for s in strings} # 一个所有值为0的字典
+strings_trie = trie(**strings_dict) # 初始化为字典树
+matches = [list(strings_trie.iter('AA'))] # 使用迭代器查找 - O(S):S为集合中最长的字符串
+# %timeit [list(strings_trie.iter('AA'))]
+</code></pre>
+</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://CecilR.github.io/tag/ZE7U5nbos" class="tag">
+                    Python
+                  </a>
+                
+                  <a href="https://CecilR.github.io/tag/cUuzO8K37" class="tag">
+                    Notes
+                  </a>
+                
+              </div>
+            
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '410c5de3f669d2c78a66',
+        clientSecret: '501ccd0368ee5f38119200fce5722f343c289188',
+        repo: 'CecilR.github.io',
+        owner: 'CecilR',
+        admin: ['CecilR'],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
