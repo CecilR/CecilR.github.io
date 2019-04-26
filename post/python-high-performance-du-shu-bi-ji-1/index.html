@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://CecilR.github.io/favicon.ico?v=1556269898788">
+<link rel="shortcut icon" href="https://CecilR.github.io/favicon.ico?v=1556289180077">
 <link rel="stylesheet" href="https://CecilR.github.io/styles/main.css">
 
 
@@ -44,7 +44,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://CecilR.github.io">
-        <img src="https://CecilR.github.io/images/avatar.png?v=1556269898788" class="site-logo">
+        <img src="https://CecilR.github.io/images/avatar.png?v=1556289180077" class="site-logo">
         <h1 class="site-title">Timing is Fun</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -429,6 +429,76 @@ strings_dict = {s:0 for s in strings} # 一个所有值为0的字典
 strings_trie = trie(**strings_dict) # 初始化为字典树
 matches = [list(strings_trie.iter('AA'))] # 使用迭代器查找 - O(S):S为集合中最长的字符串
 # %timeit [list(strings_trie.iter('AA'))]
+</code></pre>
+</li>
+</ul>
+<h3 id="s22-缓存和memoization">S2.2 缓存和memoization</h3>
+<ul>
+<li>Memoization：存储并重用以前的函数调用结果 - 动态规划</li>
+<li>基于内存的缓存 - functools.lru_cache
+<ul>
+<li>demo1</li>
+</ul>
+<pre><code class="language-python">from functools import lru_cache
+
+@lru_cache(max_size = 16)
+def sum2(a, b):
+    print(&quot;Calculating {} + {}&quot;.format(a, b))
+    return a + b
+
+print(sum2(1, 2))
+# 输出：
+# Calculating 1 + 2
+# 3
+
+print(sum2(1,2))
+# 输出：
+# 3
+
+sum2.cache_info()
+# 输出：
+# CacheInfo(hits=0, misses=1, maxsize=128, currsize=1)
+sum2.cache_clear()
+</code></pre>
+<ul>
+<li>demo2: fibonacci数列</li>
+</ul>
+<pre><code class="language-python"># 未使用memoization版本
+def fibonacci(n): # O(2^N)
+    if n &lt; 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+%timeit fibonacci(20)
+# 输出： 5.57ms per loop
+
+# 使用memoization版本 - O(N)
+import timeit
+setup_code = '''
+from functools import lru_cache
+from __main__ import fibonacci
+finonacci_memoized = lru_cache(maxsize-None)(fibonacci)
+'''
+
+results = timeit.repeat('fibonacci_memoized(20)',
+                        setup=setup_code,
+                        repeat=1000,
+                        number=1)
+print(&quot;Fibonacci took {:.2f} us&quot;.format(min(results)))
+# 输出： Fibonacci took 0.01us
+</code></pre>
+</li>
+<li>基于磁盘的缓存 - joblib(需要pip安装)
+<ul>
+<li>使用了智能散列算法</li>
+<li>demo</li>
+</ul>
+<pre><code class="language-python">from joblib import Memory
+memory = Memory(cachedir='/path/to/cachedir')
+
+@memory.cache
+def sum2(a, b):
+    return a + b
 </code></pre>
 </li>
 </ul>
