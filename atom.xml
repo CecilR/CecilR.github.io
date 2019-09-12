@@ -1,119 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" >
-
-<title>Python High Performance 读书笔记1 | Timing is Fun</title>
-<meta name="description" content="一名死磕时序数据的小白">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://CecilR.github.io/favicon.ico?v=1568276609201">
-<link rel="stylesheet" href="https://CecilR.github.io/styles/main.css">
-
-
-  
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
-  
-
-  
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-138649853-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-138649853-1');
-</script>
-
-
-  </head>
-  <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://CecilR.github.io">
-        <img src="https://CecilR.github.io/images/avatar.png?v=1568276609201" class="site-logo">
-        <h1 class="site-title">Timing is Fun</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
-      
-        
-          <a href="/" class="site-nav">
-            Home
-          </a>
-        
-      
-        
-          <a href="/archives" class="site-nav">
-            Archives
-          </a>
-        
-      
-        
-          <a href="/tags" class="site-nav">
-            Tags
-          </a>
-        
-      
-        
-          <a href="/post/about/" class="site-nav">
-            About
-          </a>
-        
-      
-    </div>
-  </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </div>
-    <div class="site-description">
-      一名死磕时序数据的小白
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-    </div>
-  </div>
-</div>
-
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">Python High Performance 读书笔记1</h2>
-            <div class="post-date">2019-04-26</div>
-            
-              <div class="feature-container" style="background-image: url('https://CecilR.github.io/post-images/python-high-performance-du-shu-bi-ji-1.jpg')">
-              </div>
-            
-            <div class="post-content">
-              <p>S1&amp;S2：性能测试&amp;纯粹的python优化</p>
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://CecilR.github.io</id>
+    <title>Timing is Fun</title>
+    <updated>2019-09-12T08:23:37.802Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://CecilR.github.io"/>
+    <link rel="self" href="https://CecilR.github.io/atom.xml"/>
+    <subtitle>一名死磕时序数据的小白</subtitle>
+    <logo>https://CecilR.github.io/images/avatar.png</logo>
+    <icon>https://CecilR.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2019, Timing is Fun</rights>
+    <entry>
+        <title type="html"><![CDATA[Python High Performance 读书笔记1]]></title>
+        <id>https://CecilR.github.io/post/python-high-performance-du-shu-bi-ji-1</id>
+        <link href="https://CecilR.github.io/post/python-high-performance-du-shu-bi-ji-1">
+        </link>
+        <updated>2019-04-26T06:55:33.000Z</updated>
+        <summary type="html"><![CDATA[<p>S1&amp;S2：性能测试&amp;纯粹的python优化</p>
+<p>Performance benchmark &amp; pure python optimization</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>S1&amp;S2：性能测试&amp;纯粹的python优化</p>
 <p>Performance benchmark &amp; pure python optimization</p>
 <!-- more --> 
 <h1 id="s1s2-性能测试-纯粹python内优化">S1&amp;S2 性能测试 &amp; 纯粹python内优化</h1>
@@ -573,79 +479,6 @@ def comprehension(): # 字典推导
 </ul>
 </li>
 </ul>
-
-            </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://CecilR.github.io/tag/ZE7U5nbos" class="tag">
-                    Python
-                  </a>
-                
-                  <a href="https://CecilR.github.io/tag/cUuzO8K37" class="tag">
-                    Notes
-                  </a>
-                
-              </div>
-            
-            
-
-            
-              
-                <div id="gitalk-container" data-aos="fade-in"></div>
-              
-
-              
-            
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-<script type="application/javascript">
-
-AOS.init();
-
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
-
-</script>
-
-
-  
-  
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-    <script>
-
-      var gitalk = new Gitalk({
-        clientID: '410c5de3f669d2c78a66',
-        clientSecret: '501ccd0368ee5f38119200fce5722f343c289188',
-        repo: 'CecilR.github.io',
-        owner: 'CecilR',
-        admin: ['CecilR'],
-        id: location.pathname,      // Ensure uniqueness and length less than 50
-        distractionFreeMode: false  // Facebook-like distraction free mode
-      })
-
-      gitalk.render('gitalk-container')
-
-    </script>
-  
-
-  
-
-
-
-
-  </body>
-</html>
+]]></content>
+    </entry>
+</feed>
