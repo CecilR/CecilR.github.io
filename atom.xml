@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://CecilR.github.io</id>
     <title>Timing is Fun</title>
-    <updated>2019-09-12T08:23:37.802Z</updated>
+    <updated>2019-09-28T13:07:17.625Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://CecilR.github.io"/>
     <link rel="self" href="https://CecilR.github.io/atom.xml"/>
@@ -10,6 +10,312 @@
     <logo>https://CecilR.github.io/images/avatar.png</logo>
     <icon>https://CecilR.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Timing is Fun</rights>
+    <entry>
+        <title type="html"><![CDATA[Matplotlib常用绘图指令]]></title>
+        <id>https://CecilR.github.io/post/matplotlib-chang-yong-hui-tu-zhi-ling</id>
+        <link href="https://CecilR.github.io/post/matplotlib-chang-yong-hui-tu-zhi-ling">
+        </link>
+        <updated>2019-09-28T13:00:41.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="常用配置-matplotlibrcparams">常用配置: matplotlib.rcParams</h2>
+<ul>
+<li>A dictionary object including validation</li>
+</ul>
+<pre><code class="language-python">    import matplotlib as mpl
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+    
+    mpl.rcParams['font.sans-serifs'] = ['SimHei'] # 中文支持
+    mpl.rcParams['axes.unicode_minus'] = False # 正常显示负号
+    
+    mpl.rcParams['lines.linewidth'] = 5 # 线条宽度
+    mpl.rcParams['lines.color'] = 'red' # 线条颜色
+    mpl.rcParams['lines.linestyle'] = '-' # 线条样式
+</code></pre>
+<hr>
+<h2 id="基本图形">基本图形</h2>
+<h3 id="直方图">直方图</h3>
+<ul>
+<li>查看分布规律</li>
+<li>plt.hist(x, bins)
+<ul>
+<li>x - array or sequence of (n,) arrays，数据data</li>
+<li>bins - int or sequence or str, optional， 横坐标区间</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    
+    height = [168, 155, 182, 170, 173, 161]
+    bins = range(150,191,5)
+    
+    plt.hist(height, bins=bins)
+    plt.show()
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://CecilR.github.io/post-images/1569675696544.png" alt=""></figure>
+<h3 id="条形图">条形图</h3>
+<ul>
+<li>同类数据进行对比</li>
+<li>plt.bar(x, y)</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    
+    classes = ['class 1', 'class 2', 'class 3']
+    scores = [70, 80, 60]
+    
+    plt.bar(classes, scores)
+    plt.show()
+``
+![](https://CecilR.github.io/post-images/1569675754243.png)
+
+### 折线图
+
+- 展示数据随某一指标变化的关系
+- plt.plot(x, y)
+```python
+    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    
+    plt.plot(year, height)
+    plt.title('身高随时间变化图')
+    plt.show()
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://CecilR.github.io/post-images/1569675782251.png" alt=""></figure>
+<h3 id="饼图">饼图</h3>
+<ul>
+<li>展示不同类在整体中所占的比重</li>
+<li>plt.pie(data, labels, autopct)
+<ul>
+<li>data - array or sequence of (n,) arrays，数据data</li>
+<li>labels - list, optional, default: None，数据标签</li>
+<li>autopct - None (default), string, or function, optional，占比计算</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    
+    labels = ['衣', '食', '住', '行' ]
+    data = [2000, 4000, 2000, 1000]
+    
+    plt.pie(data, labels=labels, autopct='%1.1f%%')
+    plt.show()
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://CecilR.github.io/post-images/1569675789800.png" alt=""></figure>
+<h3 id="散点图">散点图</h3>
+<ul>
+<li>验证二维数据的相关性</li>
+<li>发现不同类别的二维数据区位图</li>
+<li>plt.scatter(X, Y)</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    
+    data = [[18.9, 10.4], [21.3, 8.7], [19.5, 11.6], [20.5, 9.7], [19.9, 9.4], [22.3, 10.6]]
+    
+    X = [item[0] for item in data]
+    Y = [item[1] for item in data]
+    
+    plt.scatter(X, Y)
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    plt.title('超市商品价位与销量散点图')
+    plt.xlabel('价格（元）')
+    plt.ylabel('销量（件）')
+    plt.text(19, 11, '牙膏')
+    plt.text(20, 9.5, '纸巾')
+    plt.text(22, 10.5, '洗衣液')
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://CecilR.github.io/post-images/1569675802145.png" alt=""></figure>
+<h3 id="箱线图">箱线图</h3>
+<ul>
+<li>显示一组数据分散情况的统计图</li>
+</ul>
+<figure data-type="image" tabindex="5"><img src="https://CecilR.github.io/post-images/1569675815060.png" alt=""></figure>
+<ul>
+<li>plt.boxplot(X)</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    
+    data=[77, 70, 72, 89, 89, 70, 90, 87, 94, 63, 81, 99, 94, 80, 95, 67, 65, 88, 60, 67]
+    plt.boxplot(X)
+    plt.show()
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://CecilR.github.io/post-images/1569675822534.png" alt=""></figure>
+<h3 id="极线图">极线图</h3>
+<ul>
+<li>极坐标下的数据图，善于表示周期性数据
+<ul>
+<li>数据点: [极径，角度]</li>
+</ul>
+</li>
+<li>projection = ‘polar’</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    
+    r = [1,2,3,4,5] #极径
+    theta = [0.0, 1.57, 3.14, 4.71, 6.28] # 角度
+    
+    ax = plt.subplot(111, projection='polar')
+    ax.plot(theta, r)
+</code></pre>
+<figure data-type="image" tabindex="7"><img src="https://CecilR.github.io/post-images/1569675828215.png" alt=""></figure>
+<h3 id="阶梯图">阶梯图</h3>
+<ul>
+<li>一般用来反映随时间变化的数据</li>
+<li>plt.step(X, Y)</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    
+    year = range(2005, 2015)
+    height = [157, 160, 162, 163, 167, 170, 173, 175, 179, 182]
+    
+    plt.step(year, height)
+</code></pre>
+<figure data-type="image" tabindex="8"><img src="https://CecilR.github.io/post-images/1569675839150.png" alt=""></figure>
+<hr>
+<h2 id="高级图形">高级图形</h2>
+<h3 id="图表参数配置">图表参数配置</h3>
+<ul>
+<li>title: 标题</li>
+<li>xlabel, ylabel: x, y轴标签</li>
+<li>xticks(x, names): x轴数据标记
+<ul>
+<li>x - x轴数据</li>
+<li>names - list, 数据名</li>
+</ul>
+</li>
+<li>text(x, y, str): 添加文字
+<ul>
+<li>x,y - 文字坐标</li>
+<li>str - 添加的文字</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    
+    classes = [1, 2, 3]
+    scores = [70, 80, 60]
+    names = ['A班', 'B班', 'C班']
+    
+    plt.bar(classes, scores)
+    
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    plt.title('成绩柱状图')
+    plt.xlabel('班级')
+    plt.ylabel('成绩')
+    plt.xticks(classes, names)
+    for i in range(1,4):
+    	plt.text(i, scores[i-1]+1, scores[i-1])
+    plt.show()
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="https://CecilR.github.io/post-images/1569675848380.png" alt=""></figure>
+<h3 id="堆积图">堆积图</h3>
+<ul>
+<li>展示变量分类趋势和总和趋势</li>
+<li>plt.bar(x, y, bottom, color, label)  - 叠加绘制
+<ul>
+<li>x, y - 横纵坐标</li>
+<li>bottom - 底部开始值</li>
+<li>color， label - 颜色，标签</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    
+    n = 5
+    number = ['1', '2', '3', '4', '5']
+    ch = [72,80,66,77,92]
+    math = [62, 92, 72, 75, 88]
+    eng = [76, 81, 73, 75, 80]
+    chmath = [math[i]+ch[i] for i in range(5)]
+    x = range(0,5)
+    
+    plt.bar(x, ch, color='r', label='语文')
+    plt.bar(x, math, bottom=ch, color='g', label='数学')
+    plt.bar(x, eng, bottom=chmath, color='b', label='英语')
+    plt.ylim(0, 300)
+    plt.title('成绩')
+    plt.legend(loc='upper right')
+    plt.grid(axis='y', color='gray', linestyle=':', linewidth=2)
+    plt.xticks(x, number)
+    plt.xlabel('学号')
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="https://CecilR.github.io/post-images/1569675858062.png" alt=""></figure>
+<h3 id="分块图">分块图</h3>
+<ul>
+<li>对比同一变量不同类别的值大小</li>
+<li>plt.bar(x, y, width=0.4, fc='r')
+<ul>
+<li>x,y - 横纵坐标</li>
+<li>width - 宽度</li>
+<li>fc - 颜色</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    
+    names = ['语', '数', '英']
+    c1 = [81.4, 83, 87.1] # class 1
+    c2 = [85.6, 87.4, 90] # class 2
+    c3 = [78, 81.2, 86.1] # class 3
+    
+    width = 0.4
+    
+    x1 = [1,3,5]
+    x2 = [1.4,3.4,5.4]
+    x3 = [1.8,3.8,5.8]
+    
+    plt.bar(x1, c1, label='class 1', fc='r', width=width)
+    plt.bar(x2, c2, label='class 2', fc='g', width=width)
+    plt.bar(x3, c3, label='class 3', fc='b', width=width)
+    plt.xticks(x2, names)
+    plt.legend()
+    plt.title('班级成绩图')
+    plt.ylabel('成绩')
+</code></pre>
+<figure data-type="image" tabindex="11"><img src="https://CecilR.github.io/post-images/1569676000583.png" alt=""></figure>
+<h3 id="气泡图">气泡图</h3>
+<ul>
+<li>散点图基础上增加气泡大小来表示另一个变量，感受三个变量的关系</li>
+<li>plt.scatter(x, y, s=Z)
+<ul>
+<li>x, y - 横纵坐标</li>
+<li>s - 气泡大小</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
+    %matplotlib inline
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    
+    data = [[18.9, 10.4, 20], [21.3, 8.7, 40], [19.5, 11.6, 60], [20.5, 9.7, 80], \
+    [19.9, 9.4, 60], [22.3, 10.6,40]]
+    
+    X = [item[0] for item in data]
+    Y = [item[1] for item in data]
+    Z = [item[2] for item in data]
+    
+    plt.scatter(X, Y, s=Z)
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.slabel('z')
+</code></pre>
+<figure data-type="image" tabindex="12"><img src="https://CecilR.github.io/post-images/1569675874663.png" alt=""></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python High Performance 读书笔记1]]></title>
         <id>https://CecilR.github.io/post/python-high-performance-du-shu-bi-ji-1</id>
