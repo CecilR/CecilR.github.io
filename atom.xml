@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://CecilR.github.io</id>
     <title>Timing is Fun</title>
-    <updated>2019-09-28T13:11:43.266Z</updated>
+    <updated>2019-09-28T13:16:07.239Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://CecilR.github.io"/>
     <link rel="self" href="https://CecilR.github.io/atom.xml"/>
@@ -66,15 +66,14 @@
     
     plt.bar(classes, scores)
     plt.show()
-``
-![](https://CecilR.github.io/post-images/1569675754243.png)
-
-### 折线图
-
-- 展示数据随某一指标变化的关系
-- plt.plot(x, y)
-```python
-    import matplotlib.pyplot as plt 
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://CecilR.github.io/post-images/1569675754243.png" alt=""></figure>
+<h3 id="折线图">折线图</h3>
+<ul>
+<li>展示数据随某一指标变化的关系</li>
+<li>plt.plot(x, y)</li>
+</ul>
+<pre><code class="language-python">    import matplotlib.pyplot as plt 
     %matplotlib inline
     
     plt.rcParams['font.sans-serif'] = ['SimHei']
@@ -83,7 +82,7 @@
     plt.title('身高随时间变化图')
     plt.show()
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://CecilR.github.io/post-images/1569675782251.png" alt=""></figure>
+<figure data-type="image" tabindex="3"><img src="https://CecilR.github.io/post-images/1569675782251.png" alt=""></figure>
 <h3 id="饼图">饼图</h3>
 <ul>
 <li>展示不同类在整体中所占的比重</li>
@@ -106,7 +105,7 @@
     plt.pie(data, labels=labels, autopct='%1.1f%%')
     plt.show()
 </code></pre>
-<figure data-type="image" tabindex="3"><img src="https://CecilR.github.io/post-images/1569675789800.png" alt=""></figure>
+<figure data-type="image" tabindex="4"><img src="https://CecilR.github.io/post-images/1569675789800.png" alt=""></figure>
 <h3 id="散点图">散点图</h3>
 <ul>
 <li>验证二维数据的相关性</li>
@@ -130,12 +129,12 @@
     plt.text(20, 9.5, '纸巾')
     plt.text(22, 10.5, '洗衣液')
 </code></pre>
-<figure data-type="image" tabindex="4"><img src="https://CecilR.github.io/post-images/1569675802145.png" alt=""></figure>
+<figure data-type="image" tabindex="5"><img src="https://CecilR.github.io/post-images/1569675802145.png" alt=""></figure>
 <h3 id="箱线图">箱线图</h3>
 <ul>
 <li>显示一组数据分散情况的统计图</li>
 </ul>
-<figure data-type="image" tabindex="5"><img src="https://CecilR.github.io/post-images/1569675815060.png" alt=""></figure>
+<figure data-type="image" tabindex="6"><img src="https://CecilR.github.io/post-images/1569675815060.png" alt=""></figure>
 <ul>
 <li>plt.boxplot(X)</li>
 </ul>
@@ -146,7 +145,7 @@
     plt.boxplot(X)
     plt.show()
 </code></pre>
-<figure data-type="image" tabindex="6"><img src="https://CecilR.github.io/post-images/1569675822534.png" alt=""></figure>
+<figure data-type="image" tabindex="7"><img src="https://CecilR.github.io/post-images/1569675822534.png" alt=""></figure>
 <h3 id="极线图">极线图</h3>
 <ul>
 <li>极坐标下的数据图，善于表示周期性数据
@@ -165,7 +164,7 @@
     ax = plt.subplot(111, projection='polar')
     ax.plot(theta, r)
 </code></pre>
-<figure data-type="image" tabindex="7"><img src="https://CecilR.github.io/post-images/1569675828215.png" alt=""></figure>
+<figure data-type="image" tabindex="8"><img src="https://CecilR.github.io/post-images/1569675828215.png" alt=""></figure>
 <h3 id="阶梯图">阶梯图</h3>
 <ul>
 <li>一般用来反映随时间变化的数据</li>
@@ -179,7 +178,7 @@
     
     plt.step(year, height)
 </code></pre>
-<figure data-type="image" tabindex="8"><img src="https://CecilR.github.io/post-images/1569675839150.png" alt=""></figure>
+<figure data-type="image" tabindex="9"><img src="https://CecilR.github.io/post-images/1569675839150.png" alt=""></figure>
 <hr>
 <h2 id="高级图形">高级图形</h2>
 <h3 id="图表参数配置">图表参数配置</h3>
@@ -217,7 +216,7 @@
     	plt.text(i, scores[i-1]+1, scores[i-1])
     plt.show()
 </code></pre>
-<figure data-type="image" tabindex="9"><img src="https://CecilR.github.io/post-images/1569675848380.png" alt=""></figure>
+<figure data-type="image" tabindex="10"><img src="https://CecilR.github.io/post-images/1569675848380.png" alt=""></figure>
 <h3 id="堆积图">堆积图</h3>
 <ul>
 <li>展示变量分类趋势和总和趋势</li>
@@ -251,7 +250,7 @@
     plt.xticks(x, number)
     plt.xlabel('学号')
 </code></pre>
-<figure data-type="image" tabindex="10"><img src="https://CecilR.github.io/post-images/1569675858062.png" alt=""></figure>
+<figure data-type="image" tabindex="11"><img src="https://CecilR.github.io/post-images/1569675858062.png" alt=""></figure>
 <h3 id="分块图">分块图</h3>
 <ul>
 <li>对比同一变量不同类别的值大小</li>
@@ -286,7 +285,7 @@
     plt.title('班级成绩图')
     plt.ylabel('成绩')
 </code></pre>
-<figure data-type="image" tabindex="11"><img src="https://CecilR.github.io/post-images/1569676000583.png" alt=""></figure>
+<figure data-type="image" tabindex="12"><img src="https://CecilR.github.io/post-images/1569676000583.png" alt=""></figure>
 <h3 id="气泡图">气泡图</h3>
 <ul>
 <li>散点图基础上增加气泡大小来表示另一个变量，感受三个变量的关系</li>
@@ -313,7 +312,7 @@
     plt.ylabel('y')
     plt.slabel('z')
 </code></pre>
-<figure data-type="image" tabindex="12"><img src="https://CecilR.github.io/post-images/1569675874663.png" alt=""></figure>
+<figure data-type="image" tabindex="13"><img src="https://CecilR.github.io/post-images/1569675874663.png" alt=""></figure>
 ]]></content>
     </entry>
     <entry>
