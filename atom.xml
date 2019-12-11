@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://CecilR.github.io</id>
     <title>Timing is Fun</title>
-    <updated>2019-12-11T09:05:05.052Z</updated>
+    <updated>2019-12-11T09:16:44.776Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://CecilR.github.io"/>
     <link rel="self" href="https://CecilR.github.io/atom.xml"/>
@@ -10,6 +10,34 @@
     <logo>https://CecilR.github.io/images/avatar.png</logo>
     <icon>https://CecilR.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Timing is Fun</rights>
+    <entry>
+        <title type="html"><![CDATA[Deep learning-based Applications in Industrial Process Monitoring - Fault detection]]></title>
+        <id>https://CecilR.github.io/post/deep-learning-based-applications-in-industrial-process-monitoring-fault-detection</id>
+        <link href="https://CecilR.github.io/post/deep-learning-based-applications-in-industrial-process-monitoring-fault-detection">
+        </link>
+        <updated>2019-12-11T09:06:42.000Z</updated>
+        <content type="html"><![CDATA[<p><img src="https://CecilR.github.io/post-images/1576055643782.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055648958.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055787588.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055651911.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055657611.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055661139.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055664131.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055667671.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055671111.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055737569.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055742250.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055746159.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055749184.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055753369.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055758117.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055762404.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055766369.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055770248.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055774485.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576055778143.PNG" alt=""></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Deep learning-based Applications in Industrial Process Monitoring - Soft sensor, Quality prediction]]></title>
         <id>https://CecilR.github.io/post/deep-learning-based-applications-in-industrial-process-monitoring-soft-sensor-quality-prediction</id>
