@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://CecilR.github.io</id>
     <title>Timing is Fun</title>
-    <updated>2019-09-28T13:16:07.239Z</updated>
+    <updated>2019-12-11T09:04:04.736Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://CecilR.github.io"/>
     <link rel="self" href="https://CecilR.github.io/atom.xml"/>
@@ -10,6 +10,30 @@
     <logo>https://CecilR.github.io/images/avatar.png</logo>
     <icon>https://CecilR.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, Timing is Fun</rights>
+    <entry>
+        <title type="html"><![CDATA[Deep learning-based Applications in Industrial Process Monitoring - Soft sensor, Quality prediction]]></title>
+        <id>https://CecilR.github.io/post/deep-learning-based-applications-in-industrial-process-monitoring-soft-sensor-quality-prediction</id>
+        <link href="https://CecilR.github.io/post/deep-learning-based-applications-in-industrial-process-monitoring-soft-sensor-quality-prediction">
+        </link>
+        <updated>2019-12-11T08:55:36.000Z</updated>
+        <content type="html"><![CDATA[<p><img src="https://CecilR.github.io/post-images/1576054628861.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054720763.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054723275.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054725797.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054728353.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054731472.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054811232.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054820341.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054859744.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054864646.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054869221.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054873605.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054914689.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054919466.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054925147.PNG" alt=""><br>
+<img src="https://CecilR.github.io/post-images/1576054930628.PNG" alt=""></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Matplotlib常用绘图指令]]></title>
         <id>https://CecilR.github.io/post/matplotlib-chang-yong-hui-tu-zhi-ling</id>
